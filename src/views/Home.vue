@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <header></header>
+    <header>dsfgsdf</header>
+    <section>
+      <article>dfsafds</article>
+    </section>
   </div>
 </template>
 
@@ -15,3 +18,17 @@ export default {
   }
 };
 </script>
+<style lang="scss" scoped>
+.home{
+  background: none;
+  border: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 200;
+  transition: background 0.5s;
+}
+</style>
+
+

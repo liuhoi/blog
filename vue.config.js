@@ -2,12 +2,12 @@ const path = require('path');
 
 const resolve = dir => path.join(__dirname, dir)
 
-const BASE_URL = process.env.NODE_ENV
+const publicPath = process.env.NODE_ENV
   ?'/'
   :'/'
 
 module.exports = {
-  baseUrl:BASE_URL,
+  publicPath:publicPath,
   lintOnSave:false,
   productionSourceMap:false,
   chainWebpack: config => {
