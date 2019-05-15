@@ -6,7 +6,7 @@
     </div>
     <div class="app-body">
       <div id="tag-cloud">
-        <a :class="'tag'+index" :data-name="'tag-' + item.tagName" v-for="(item, index) in tagsList" :key="index">{{item.tagName}}</a>
+        <a :class="'tag'+index" :data-name="'tag-' + item.tagName" v-for="(item, index) in tagsList" :key="index" @click="goAnchcor('tag-'+item.tagName)">{{item.tagName}}</a>
       </div>
       <div class="tag-list" v-for="(item, index) in tagsList" :key="index">
         <h3 class="tag-name" :id="'tag-' + item.tagName">{{item.tagName}}</h3>
@@ -21,6 +21,9 @@
 </template>
 
 <script>
+
+import {scrollAnimation} from  '@/libs/utils'
+
 export default {
   name:'TagsView',
   data(){
@@ -74,6 +77,13 @@ export default {
       });
       return a
     },[])
+  },
+  methods:{
+    goAnchcor(name){
+      let doc = document;
+      let position = doc.querySelector('#'+name).getBoundingClientRect().top  + doc.documentElement.scrollTop - doc.querySelector('.header').offsetHeight;
+      scrollAnimation(position,500)
+    }
   }
 }
 </script>

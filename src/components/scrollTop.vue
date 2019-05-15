@@ -1,14 +1,20 @@
 <template>
   <div class="scroll-top">
-    <span class="arrow-icon"></span>
+    <span class="arrow-icon" @click="scrollAnimation(0)"></span>
   </div>
 </template>
 
 <script>
+
+import {scrollAnimation} from  '@/libs/utils'
+
 export default {
   name: "scrollTop",
   created(){
     
+  },
+  methods:{
+    scrollAnimation
   }
 };
 </script>

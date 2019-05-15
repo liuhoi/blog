@@ -38,3 +38,43 @@ export const timetampToMonth = (timestamp,line ="-") => {
     day = day < 10? '0' + day : day;
     return `${month}${line}${day}`
 }
+
+export const scrollAnimation = (to = 0, time = 600) => {
+    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    let direction = to - scrollTop > 0 ? 'up': 'down'
+    let step = Math.abs((scrollTop - to)/(time/60));
+    let position = document.documentElement.scrollTop;
+    function smooth(){
+        switch(direction){
+            case 'up':
+                position += step;
+                if(position < to){
+                    document.documentElement.scrollTop = position;
+                    requestAnimationFrame(smooth)
+                }else{
+                    document.documentElement.scrollTop = to;
+                }
+            break;
+            case 'down':
+                position -= step;
+                if(position > to){
+                    document.documentElement.scrollTop = position;
+                    requestAnimationFrame(smooth)
+                }else{
+                    document.documentElement.scrollTop = to;
+                }
+            break;
+        }
+    }
+    requestAnimationFrame(smooth)
+}
+
+export const getElementTop = (element) => {
+    let actualTop = element.offsetTop; 
+    let current = element.offsetParent; 
+    while (current !== null){ 
+        actualTop += current. offsetTop; 
+        current = current.offsetParent; 
+    } 
+    return actualTop; 
+}
