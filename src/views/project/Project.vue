@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="projects-view">
     <div
       id="article-banner"
       :style="{backgroundImage: 'url('+require('@/assets/images/bg3.svg')+')'}"
@@ -34,7 +34,7 @@ import { getProjectsFrmGithub } from "@/api/data";
 import GeoPattern from "geopattern";
 
 export default {
-  name: "Projects",
+  name: "projectsView",
   data() {
     return {
       projectList: ""
@@ -66,11 +66,72 @@ export default {
         .slice(0, 6);
       console.log(repos);
       this.projectList = repos;
-      // $(".card-header").each(function() {
-      //   var name = $(this).data("name");
-      //   $(this).geopattern(name);
-      // });
     });
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.projects-view{
+  .project-app {
+    max-width: 1020px;
+    min-width: 300px;
+    padding: 1em 0;
+  }
+  .card-container {
+    margin: 30px auto;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .project-card {
+      width: 320px;
+      height: 160px;
+      margin-bottom: 20px;
+      position: relative;
+      .card-wrap {
+        box-sizing: border-box;
+        height: 100%;
+        display: block;
+        padding: 20px;
+        border: 1px solid #e5e5e5;
+        border-radius: 4px;
+        color: #34495e;
+        transition: border-color 0.1s ease-in-out, box-shadow 0.1s ease-in-out;
+        &:hover {
+          border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.15);
+          box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .card-header {
+          position: absolute;
+          width: 100%;
+          height: 20px;
+          top: 0;
+          left: 0;
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
+        }
+        .card-title {
+          margin-top: 10px;
+          margin-bottom: 5px;
+          font-size: 1.2em;
+        }
+        .card-footer {
+          box-sizing: border-box;
+          position: absolute;
+          width: 100%;
+          padding: 0 20px;
+          bottom: 20px;
+          left: 0;
+          span:first-child {
+            padding-right: 20px;
+          }
+          .fa {
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}
+</style>

@@ -1,78 +1,154 @@
 <template>
-  <div>
+  <div class="archives-view">
     <div id="article-banner" :style="{backgroundImage: 'url('+require('@/assets/images/bg2.svg')+')'}">
       <h2>Archives</h2>
       <p class="post-date">文章归档</p>
     </div>
     <div class="app-body" id="archives">
-      <section class="time-section">
-        <h1 class="section-year">2018</h1>
+      <section class="time-section" v-for="(item,index) in archivesList" :key ="index">
+        <h1 class="section-year">{{item.year}}</h1>
         <div class="section-list">
-          <div class="section-list-item">
-            <a href="/2018/01/14/Day08-解密setState机制/" class="archive-title">解密setState机制</a>
-            <p class="archive-date">01-14</p>
-          </div>
-        </div>
-      </section>
-      <section class="time-section">
-        <h1 class="section-year">2017</h1>
-        <div class="section-list">
-          <div class="section-list-item">
-            <a href="/2017/09/17/Day07-组件生命周期详解/" class="archive-title">组件生命周期详解</a>
-            <p class="archive-date">09-17</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/09/10/Day06-理解Virtual-DOM模型/" class="archive-title">理解Virtual-DOM模型</a>
-            <p class="archive-date">09-10</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/09/02/Day05-组件间的通信/" class="archive-title">React组件间的通信</a>
-            <p class="archive-date">09-02</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/07/01/Day04-React中的样式处理/" class="archive-title">React中的样式处理</a>
-            <p class="archive-date">07-01</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/30/Day03-React使用表单的正确姿势/" class="archive-title">React使用表单的正确姿势</a>
-            <p class="archive-date">06-30</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/28/Day02-React事件系统/" class="archive-title">React事件系统</a>
-            <p class="archive-date">06-28</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/26/Day01-初识React/" class="archive-title">初识React</a>
-            <p class="archive-date">06-26</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/17/React常见问题的整理/" class="archive-title">React常见问题的整理</a>
-            <p class="archive-date">06-17</p>
-          </div>
-          <div class="section-list-item">
-            <a
-              href="/2017/06/14/深入理解flex-grow、flex-basis、flex-shrink/"
-              class="archive-title"
-            >深入理解flex-grow、flex-basis、flex-shrink</a>
-            <p class="archive-date">06-14</p>
-          </div>
-          <div class="section-list-item">
-            <a
-              href="/2017/06/12/纯手工打造前端后端分离项目中的mock-server/"
-              class="archive-title"
-            >纯手工打造前端后端分离项目中的mock-server</a>
-            <p class="archive-date">06-12</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/09/深入理解JavaScript原型和原型链/" class="archive-title">深入理解JavaScript原型和原型链</a>
-            <p class="archive-date">06-09</p>
-          </div>
-          <div class="section-list-item">
-            <a href="/2017/06/07/纪念那些年我写的PHP/" class="archive-title">纪念那些年我写的PHP</a>
-            <p class="archive-date">06-07</p>
+          <div class="section-list-item" v-for="(list, index1) in item.list" :key="index1">
+            <router-link :to="list.id" class="archive-title">{{list.name}}</router-link>
+            <p class="archive-date">{{list.month}}</p>
           </div>
         </div>
       </section>
     </div>
   </div>
 </template>
+
+<script>
+
+import {timetampToYear, timetampToMonth} from '@/libs/utils'
+
+export default {
+  name:'archivesView',
+  data(){
+    return {
+      articleList:[{
+        name:'深入理解系列',
+        time:'1494892800000',
+        tags:['深入理解系列'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制react',
+        time:'1495065600000',
+        tags:['react'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制php',
+        time:'1497052800000',
+        tags:['php'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制前端开发',
+        time:'1528588800000',
+        tags:['前端开发'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制react前端开发',
+        time:'1433894400000',
+        tags:['react','前端开发'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      }],
+      archivesList:[]
+    }
+  },
+  created(){
+    this.archivesList = this.articleList
+    .map(v => {
+      return {
+        ...v,
+        year:timetampToYear(v.time),
+        month:timetampToMonth(v.time)
+      }
+    })
+    .sort((a,b) => b.time - a.time)
+    .reduce((a,v)=>{
+      let isExist = a.some(vs => vs.year == v.year)
+      if(isExist){
+        a.find(vf=>vf.year == v.year).list.push(v)
+      }else{
+        a.push({
+          year: v.year,
+          list :[v]
+        })
+      }
+      return a;
+    },[])
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.archives-view{
+  #archives{
+    &:before {
+      position: absolute;
+      top: 2em;
+      bottom: 1em;
+      left: 30px;
+      height: auto;
+      content: '';
+      background-color: #42b983;
+      width: 4px;
+    }
+  }
+  .time-section {
+    padding-left: 30px;
+    position: relative;
+    .section-year {
+      cursor: pointer;
+      font-size: 1.8em;
+      margin-left: 10px;
+      &:before {
+        position: absolute;
+        left: 8px;
+        top: 11px;
+        content: '';
+        background-color: #fff;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #42b983;
+        border-radius: 50%;
+      }
+    }
+    .section-list{
+      .section-list-item {
+        margin: 20px 0 20px 10px;
+        position: relative;
+        &:before {
+          position: absolute;
+          left: -29px;
+          top: 7px;
+          content: '';
+          background-color: #42b983;
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+        }
+        .archive-title {
+          color: #34495e;
+          transition: all 0.3s ease;
+          font-size: 1.1em;
+          &:hover {
+            color: #42b983;
+            padding-left: 10px;
+          }
+        }
+        .archive-date {
+          color: #7f8c8d;
+          font-size: 0.9em;
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+}
+</style>

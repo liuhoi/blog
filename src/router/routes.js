@@ -46,5 +46,14 @@ export default [
       name:'about',
       component:() => import("@/views/about/About.vue")
     }]
+  },
+  {
+    path: "/detail/:id",
+    component: Main,
+    children:[{
+      path:'',
+      name:'detail',
+      component:() => import("@/views/detail/Detail.vue")
+    }]
   }
 ];

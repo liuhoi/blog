@@ -1,73 +1,20 @@
 <template>
-  <div class="app-body">
-    <article class="article-card">
+  <div class="app-body home-view">
+    <article class="article-card" v-for="(item, index) in articleList" :key="index">
       <h2 class="article-head">
-        <a href="/2018/01/14/Day08-解密setState机制/">解密setState机制</a>
+        <router-link :to="item.id">{{item.name}}</router-link>
       </h2>
-      <p class="article-date">January 14, 2018</p>
-      <a href="/tags#react">
-        <span class="tag-code">react</span>
-      </a>
-      <div class="article-summary">
-        state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。
-        setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...
+      <p class="article-date">{{timetampToTime(item.time)}}</p>
+      <div class="article-tags">
+        <router-link to="/tags#react"  v-for="(tag, index1) in item.tags" :key="index1">
+          <span class="tag-code">{{tag}}</span>
+        </router-link>
       </div>
-      <a class="more" href="/2018/01/14/Day08-解密setState机制/">Read more</a>
-    </article>
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/09/17/Day07-组件生命周期详解/">组件生命周期详解</a>
-      </h2>
-      <p class="article-date">September 17, 2017</p>
-      <a href="/tags#react">
-        <span class="tag-code">react</span>
-      </a>
+      
       <div class="article-summary">
-        &gt;&gt;&gt;from gnassl import * &gt;&gt;&gt;GPS_START_DATE datetime.date(1980, 11, 21)&gt;&gt;&gt;GPS_START_DATEdatetime.date(1980, 11, 21)
-        Re ...
+        {{item.brief}}
       </div>
-      <a class="more" href="/2017/09/17/Day07-组件生命周期详解/">Read more</a>
-    </article>
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/09/10/Day06-理解Virtual-DOM模型/">理解Virtual-DOM模型</a>
-      </h2>
-      <p class="article-date">September 10, 2017</p>
-      <a href="/tags#react">
-        <span class="tag-code">react</span>
-      </a>
-      <div
-        class="article-summary"
-      >Virtual DOM 之于 React，就好比一个虚拟空间，React 几乎所有的工作都是基于 Virtual DOM 完成的。其中，Virtual DOM 模型负责 Virtual DOM 底层框架的构建工作，它拥有一整套的 Virtual DOM 标签，并负责虚拟节点及其属性的构建、 ...</div>
-      <a class="more" href="/2017/09/10/Day06-理解Virtual-DOM模型/">Read more</a>
-    </article>
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/09/02/Day05-组件间的通信/">React组件间的通信</a>
-      </h2>
-      <p class="article-date">September 2, 2017</p>
-      <a href="/tags#react">
-        <span class="tag-code">react</span>
-      </a>
-      <div class="article-summary">
-        React 是以组件组合的形式组织的，组件因为彼此是相互独立的。所以在嵌套关系上就会有三种不同的可能性：父组件向子组件通信、子组件向父组件通信和没有嵌套关系间的组件通信。
-        1.父组件向子组件通信React 的数据流动是单向的，所以父组件向子组件通信也是最常见的方式。父组件通过 props ...
-      </div>
-      <a class="more" href="/2017/09/02/Day05-组件间的通信/">Read more</a>
-    </article>
-    <article class="article-card">
-      <h2 class="article-head">
-        <a href="/2017/07/01/Day04-React中的样式处理/">React中的样式处理</a>
-      </h2>
-      <p class="article-date">July 1, 2017</p>
-      <a href="/tags#react">
-        <span class="tag-code">react</span>
-      </a>
-      <div class="article-summary">
-        在 React 中，样式处理是至关重要的一环，也是当前非常热门的话题
-        1.基本样式处理React 组件最终会被渲染成 HTML，所以我们可以使用原先 HTML 设置 CSS 一样的方法来设置样式。我们可以设置 className props 来添加类名，也可以通过 style pro ...
-      </div>
-      <a class="more" href="/2017/07/01/Day04-React中的样式处理/">Read more</a>
+      <router-link :to="item.id" class="more" >Read more</router-link>
     </article>
     <div class="guide-pager">
       <a class="unvisible" href="/">
@@ -83,14 +30,113 @@
 </template>
 
 <script>
-// @ is an alias to /src
+
+import {timetampToTime} from '@/libs/utils'
 
 export default {
-  name: "home",
-  components: {}
+  name: "HomeView",
+  data(){
+    return {
+      articleList:[{
+        name:'深入理解系列',
+        time:'1494892800000',
+        tags:['深入理解系列'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制react',
+        time:'1495065600000',
+        tags:['react'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制php',
+        time:'1497052800000',
+        tags:['php'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制前端开发',
+        time:'1528588800000',
+        tags:['前端开发'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      },{
+        name:'解密setState机制react前端开发',
+        time:'1433894400000',
+        tags:['react','前端开发'],
+        id:'2018/01/14/Day08-解密setState机制',
+        brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
+      }]
+    }
+  },
+  methods:{
+    timetampToTime
+  }
 };
 </script>
 <style lang="scss" scoped>
+.home-view{
+  .article-card {
+    padding-bottom: 20px;
+    &:first-child {
+      margin-top: 60px;
+    }
+    .article-head {
+      font-size: 1.6em;
+      margin-bottom: 0;
+      & > a {
+        color: #34495e;
+        &:hover {
+          border-bottom: 2px solid #42b983;
+        }
+      }
+    }
+    .article-date {
+      color: #7f8c8d;
+      margin: 10px 0;
+      font-size: 0.9em;
+    }
+    .article-tags{
+      .tag-code {
+        font-family: 'Roboto Mono', Monaco, courier, monospace;
+        font-size: 0.8em;
+        display: inline-block;
+        background-color: #f8f8f8;
+        color: #e96900;
+        padding: 3px 5px;
+        margin: 0 5px 5px 0;
+        border-radius: 2px;
+        white-space: nowrap;
+      }
+    }
+    .article-summary {
+      margin: 10px 0;
+      color: #34495e;
+    }
+    .more {
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    .more:hover {
+      transform: translateX(10px);
+    }
+  }
+ .guide-pager {
+    margin: 1em 3em;
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 600;
+    .unvisible {
+      visibility: hidden;
+    }
+    .page-arrow {
+      color: #34495e;
+    }
+  }
+}
 </style>
 
 
