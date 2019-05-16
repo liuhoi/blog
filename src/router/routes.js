@@ -1,4 +1,5 @@
 import Main from '@/views/main/Main';
+
 export default [
   {
     path: "/",

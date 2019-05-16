@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <el-progress :percentage="percentage" status="success" class="progress" :show-text="false" :text-inside="false" :stroke-width="3" v-if="percentage==0"></el-progress>
     <Header :class="{'fixed-header':headerIsfixed}" ref="header"></Header> 
     <transition name="slide-fade">
       <router-view></router-view>
@@ -24,7 +23,6 @@ export default {
     return {
       headerIsfixed:true,
       scrollTopIsopacity:false,
-      percentage:0
     }
   },
   mounted(){
@@ -34,15 +32,6 @@ export default {
         document.removeEventListener('scroll',this.scrollCb.bind(this),false)
     })
    
-  },
-  beforeRouteEnter(to, from, next){
-    next(vm => {
-      vm.percentage = 0;
-       
-      setTimeout(()=>{
-        vm.percentage = 100;
-      },1000)
-    });
   },
   beforeRouteLeave(to, from, next){
     this.headerIsfixed = to.name != 'home'?false:true;

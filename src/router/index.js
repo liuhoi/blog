@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import routes from "./routes";
+import LoadingBar from '@/packages/loading-bar';
 
 Vue.use(Router);
+
+let progress ;
 
 const router = new Router({
   mode:'hash',
@@ -10,11 +13,11 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next)=>{
-  console.log(to);
+  LoadingBar.start();
   next();
 })
 router.afterEach((to, from, next)=>{
-  console.log(to);
+  LoadingBar.finish();
 })
 
 export default router;
