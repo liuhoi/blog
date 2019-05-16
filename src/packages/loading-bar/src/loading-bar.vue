@@ -10,30 +10,33 @@ export default {
   data(){
     return {
       show:false,
-      percent:0
+      percent:0,
+      transition:{
+        widthSpeed:3000,
+        opacitySpeed:100,
+        duration:400
+      }
     }
   },
   computed:{
     styles(){
+      const {widthSpeed, opacitySpeed} = this.transition;
+      const percent = this.percent
+      this.transition.duration = widthSpeed + opacitySpeed;
+      console.log(this.transition.duration)
       let styles = {
-        width:`${this.percent}%`
+        width:`${percent}%`,
+        transition:`width ${widthSpeed}ms, opacity ${opacitySpeed}ms`
       }
 
       return styles
     }
   },
-  methods:{
-    update (options){
-      console.log(options)
-      if ('percent' in options) {
-          this.percent = options.percent;
-      }
-      if ('show' in options) {
-          this.show = options.show;
-      }
-    }
+  mounted(){
+    this.$el.children[0].addEventListener('transitionend',function(){
+      console.log(this.$data)
+    }.bind(this))
   }
-  
 };
 </script>
 
@@ -50,7 +53,6 @@ export default {
     height: 3px;
     width: 0;
     background: #42b983;
-    transition: width 0.2s ease;
   }
 }
 </style>

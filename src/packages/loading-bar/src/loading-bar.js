@@ -3,37 +3,22 @@ import Main  from './loading-bar.vue';
 const LoadingBar = Vue.extend(Main);
 
 let instance,
-    timer,
-    duration = 800;
+    timer;
 
 function getLoadingBarInstance () {
     instance = instance || newInstance();
     return instance;
 }
 
-function clearTimer(){
-    if (timer) {
-        clearInterval(timer);
-        timer = null;
-    }
-}
-
-function update(options){
-    let instance  = getLoadingBarInstance();
-    instance.update(options);
-}
-
 function hide() {
     setTimeout(() => {
-        update({
-            show: false
-        });
+        instance.show = false
         setTimeout(() => {
-            update({
-                percent: 0
-            });
-        }, 200);
-    }, duration);
+            clearInterval(timer)
+            timer = null;
+            instance.percent = 0
+        }, instance.transition.opacitySpeed);
+    }, instance.transition.duration);
 }
 
 const newInstance = function(options = {}){
@@ -48,33 +33,24 @@ const newInstance = function(options = {}){
 }
 
 newInstance.start =function(){
-    if (timer) return;
-
-    let percent = 0;
-
-    update({
-        percent: percent,
-        show: true
-    });
-
+    let instance  = getLoadingBarInstance();
+    
+    instance.show = true;
+    instance.percent = 0;
+    
+  
+    // 定义每 100 秒来执行一次动画
     timer = setInterval(() => {
-        percent += Math.floor(Math.random () * 3 + 1);
-        if (percent > 95) {
-            clearTimer();
+        instance.percent += 3;
+        // 如果进度大于 95%，并且设置了自动完成，那么执行结束动作
+        if (instance.percent > 95) {
+            this.finish()
         }
-        update({
-            percent: percent,
-            show: true
-        });
-    }, 200);
+    }, 10)
 }
 
 newInstance.finish = function(){
-    clearTimer();
-    update({
-        percent: 100,
-        show: true
-    });
+    instance.percent = 100
     hide();
 }
 
