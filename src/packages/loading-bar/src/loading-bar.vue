@@ -1,7 +1,8 @@
 <template>
-  <div class="loadding-progress" v-show="show">
-    <div class="loadding-progress-bar" :style="styles"></div>
-  </div>
+  <transition name="slide"> 
+    <div class="loadding-progress-bar" v-show="show"></div>
+  </transition>
+  
 </template>
 
 <script>
@@ -10,49 +11,37 @@ export default {
   data(){
     return {
       show:false,
-      percent:0,
-      transition:{
-        widthSpeed:3000,
-        opacitySpeed:100,
-        duration:400
-      }
-    }
-  },
-  computed:{
-    styles(){
-      const {widthSpeed, opacitySpeed} = this.transition;
-      const percent = this.percent
-      this.transition.duration = widthSpeed + opacitySpeed;
-      console.log(this.transition.duration)
-      let styles = {
-        width:`${percent}%`,
-        transition:`width ${widthSpeed}ms, opacity ${opacitySpeed}ms`
-      }
-
-      return styles
     }
   },
   mounted(){
-    this.$el.children[0].addEventListener('transitionend',function(){
-      console.log(this.$data)
-    }.bind(this))
-  }
+    
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-.loadding-progress {
+.loadding-progress-bar {
   position: fixed;
   top: 0;
   z-index: 201;
   left: 0;
   right: 0;
-  .loadding-progress-bar{
-    height: 3px;
-    width: 0;
-    background: #42b983;
-  }
+  height: 3px;
+  width: 100%;
+  background: #42b983;
+}
+.slide-enter {
+  width: 0;
+}
+.slide-leave-to{
+  width: 0;
+}
+.slide-enter-active{
+   transition:width 500ms ease-in-out;
+}
+.slide-leave-active{
+   transition:width 10ms ease-in-out;
 }
 </style>
