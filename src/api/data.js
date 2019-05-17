@@ -9,4 +9,9 @@ export const getProjectsFrmGithub = () => {
     method: 'get'
   })
 }
-
+export const getDetail = () => {
+  return axios.request({
+    url: '/markdown/android.md',
+    method: 'get'
+  })
+}

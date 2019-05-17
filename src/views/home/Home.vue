@@ -2,7 +2,7 @@
   <div class="app-body home-view">
     <article class="article-card" v-for="(item, index) in articleList" :key="index">
       <h2 class="article-head">
-        <router-link :to="item.id">{{item.name}}</router-link>
+        <router-link :to="'/detail/'+item.id">{{item.name}}</router-link>
       </h2>
       <p class="article-date">{{timetampToTime(item.time)}}</p>
       <div class="article-tags">
@@ -41,31 +41,31 @@ export default {
         name:'深入理解系列',
         time:'1494892800000',
         tags:['深入理解系列'],
-        id:'2018/01/14/Day08-解密setState机制',
+        id:'解密setState机制',
         brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
       },{
         name:'解密setState机制react',
         time:'1495065600000',
         tags:['react'],
-        id:'2018/01/14/Day08-解密setState机制',
+        id:'解密setState机制',
         brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
       },{
         name:'解密setState机制php',
         time:'1497052800000',
         tags:['php'],
-        id:'2018/01/14/Day08-解密setState机制',
+        id:'解密setState机制',
         brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
       },{
         name:'解密setState机制前端开发',
         time:'1528588800000',
         tags:['前端开发'],
-        id:'2018/01/14/Day08-解密setState机制',
+        id:'解密setState机制',
         brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
       },{
         name:'解密setState机制react前端开发',
         time:'1433894400000',
         tags:['react','前端开发'],
-        id:'2018/01/14/Day08-解密setState机制',
+        id:'解密setState机制',
         brief:'state 是 React 中的重要概念。React 是通过管理状态来实现对组件的管理，通过 this.state 来访问 state，通过 this.setState 来更新 state。 setState 通过一个队列机制来实现 state 的更新。调用 setState 函数之后， ...'
       }]
     }
