@@ -3,16 +3,14 @@
     <div id="article-banner" :style="{backgroundImage: 'url('+require('@/assets/images/bg1.svg')+')'}">
       <h2>解密setState机制</h2>
       <p class="post-date">2018-01-14</p>
-      <div class="arrow-down">
+      <div class="arrow-down" @click="goAchor">
         <a href="javascript:;"></a>
       </div>
     </div>
-    <main class="app-body flex-box">
+    <div class="app-body flex-box">
       <!-- Article START -->
       <article class="post-article">
-        <section class="markdown-content">
-          <android></android> 
-        </section>
+          <markdown :md="detail"></markdown>
         <!-- Tags START -->
         <div class="tags">
           <span>Tags:</span>
@@ -31,20 +29,21 @@
         </div>
       </aside>
       <!-- Catalog END -->
-    </main>
+    </div>
   </div>
 </template>
 
 <script>
 
 import {getDetail} from '@/api/data';
-import android from './android.md';
+import markdown from '_c/markdown.vue'
+import {scrollAnimation} from  '@/libs/utils'
 
 export default {
   name: "detailView",
   data(){
     return {
-      
+      detail:''
     }
   },
   created(){
@@ -53,8 +52,16 @@ export default {
       this.detail = res.data;
     })
   },
+  methods:{
+    goAchor(){
+      let doc = document,
+          position = doc.querySelector('.app-body').offsetTop - 60,
+          scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      scrollAnimation(position,500)
+    }
+  },
   components:{
-    android:android
+    markdown
   }
 };
 </script>
